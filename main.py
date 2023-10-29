@@ -1,6 +1,4 @@
-from src.ocio import *
 from src.deporte import *
-from src.policial import *
 from src.noticias_collection import *
 from src.clasificador import Clasificador
 from src.programa import Programa

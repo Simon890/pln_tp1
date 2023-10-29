@@ -47,14 +47,13 @@ class Programa:
         
         @bot.message_handler(commands=["noticia"])
         def mostrar_noticia(mensaje):
-            nombre = mensaje.from_user.first_name
             texto = mensaje.text
             seccion = texto.split("/noticia")[1].strip()
             for noticia in self.__eval_seccion(seccion):
+                if len(noticia) > 4096:
+                    noticia = noticia[0:4093] + "..."
                 bot.reply_to(mensaje, noticia)
-                
         print("Bot iniciado!")
-        
         bot.infinity_polling()
     
     def __eval_seccion(self, seccion : int | str):
@@ -82,5 +81,5 @@ class Programa:
         return arr_res
     
     def __get_contenido(self, seccion):
-        df_data = self.c.df[self.c.df["seccion"] == self.c.seccion_lookup[seccion]]
+        df_data = self.c.df[self.c.df["seccion"] == self.c.seccion_to_int(seccion)]
         return df_data["titulo"].values, df_data["contenido"].values

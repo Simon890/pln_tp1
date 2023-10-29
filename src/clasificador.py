@@ -16,17 +16,11 @@ from gensim.models import KeyedVectors
 class Clasificador:
     
     seccion_lookup = {
-        Noticia.Ocio: 1,
         Noticia.Deporte: 2,
-        Noticia.Policial: 3,
-        Noticia.Ciudad: 4,
         Noticia.Tecnologia: 5,
         Noticia.Politica: 6,
         Noticia.Educacion: 7,
-        1: Noticia.Ocio,
         2: Noticia.Deporte,
-        3: Noticia.Policial,
-        4: Noticia.Ciudad,
         5: Noticia.Tecnologia,
         6: Noticia.Politica,
         7: Noticia.Educacion
@@ -48,18 +42,18 @@ class Clasificador:
     def __transormar_df(self):
         self.df["titulo"] = self.df["titulo"].apply(self.__lower_str)
         self.df["contenido"] = self.df["contenido"].apply(self.__lower_str)
-        self.df["seccion"] = self.df["seccion"].apply(self.__seccion_to_int)
+        self.df["seccion"] = self.df["seccion"].apply(self.seccion_to_int)
         self.df.drop("url", inplace=True, axis=1)
         
     
     def __lower_str(self, string : str) -> str:
         return string.lower()
     
-    def __seccion_to_int(self, seccion: str) -> int:
+    def seccion_to_int(self, seccion: str) -> int:
         if seccion in self.seccion_lookup: return self.seccion_lookup[seccion]
         raise Exception(f"Tipo de noticia no soportada: '{seccion}'")
     
-    def __int_to_seccion(self, nro: int) -> str:
+    def int_to_seccion(self, nro: int) -> str:
         if nro in self.seccion_lookup: return self.seccion_lookup[nro]
         raise Exception(f"ID de noticia no soportado: '{nro}'")
 
@@ -81,7 +75,7 @@ class Clasificador:
     def graficar_wordcloud(self):
         for seccion in self.secciones:
             plt.figure()
-            seccion_df = self.df[self.df["seccion"] == self.__seccion_to_int(seccion)]
+            seccion_df = self.df[self.df["seccion"] == self.seccion_to_int(seccion)]
             cloud = WordCloud(width=1280, height=720, background_color="white", stopwords=self.stop_words_esp, min_font_size=10).generate(" ".join(seccion_df["contenido"].values.flatten()))
             plt.imshow(cloud)
             plt.axis("off")
@@ -89,7 +83,7 @@ class Clasificador:
             plt.show()
     
     def similitud_titulos(self):
-        df_politica = self.df[self.df["seccion"] == self.__seccion_to_int(Noticia.Politica)]
+        df_politica = self.df[self.df["seccion"] == self.seccion_to_int(Noticia.Politica)]
         similitud = []
         for titulo1 in df_politica["titulo"].to_numpy()[0:6]:
             titulo1_vec = self.vectorizer.transform([titulo1])
@@ -99,5 +93,5 @@ class Clasificador:
                 similitud.append([titulo1, titulo2, simcos])
         df_cos = pd.DataFrame(similitud, columns=["Titulo 1", "Titulo 2", "Similitud"])
         print("\n###### SIMILITUD DEL COSENO ######")
-        print(df_cos)
+        print(df_cos.to_string())
         

@@ -3,10 +3,7 @@ import csv
 
 class Noticia:
     
-    Ocio = "ocio"
-    Policial = "policiales"
     Deporte = "deportes"
-    Ciudad = "ciudad"
     Tecnologia = "tecnologia"
     Politica = "politica"
     Educacion = "educacion"
