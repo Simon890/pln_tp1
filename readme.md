@@ -28,3 +28,12 @@ Para conseguir tu API KEY es necesario que en telegram inicies una conversación
 **BOT_KEY** -> Key del bot de telegram <br>
 **OUTPUT** -> Determina el output de los resúmenes de las noticias. Valores posibles: *telegram* o *consola* <br>
 **CSV_PATH** -> Path en donde guardar el archivo csv
+
+Para ejecutar el proyecto: 
+```
+python main.py
+```
+Para instalar dependencias:
+```
+pip install requirements.txt -r
+```
