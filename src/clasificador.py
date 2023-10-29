@@ -85,7 +85,7 @@ class Clasificador:
             cloud = WordCloud(width=1280, height=720, background_color="white", stopwords=self.stop_words_esp, min_font_size=10).generate(" ".join(seccion_df["contenido"].values.flatten()))
             plt.imshow(cloud)
             plt.axis("off")
-            plt.title(f"Sección {seccion.capitalize}")
+            plt.title(f"Sección {seccion.capitalize()}")
             plt.show()
     
     def similitud_titulos(self):
