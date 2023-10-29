@@ -5,10 +5,11 @@ from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lsa import LsaSummarizer
 import nltk
 import telebot
+from src.env import env
 
 class Programa:
     
-    API_KEY = "6332002951:AAHGkVuXNyaNR24eIkjDlRxJAy_mSaM5eeM"
+    API_KEY = env("BOT_KEY")
     
     def __init__(self, clasificador : Clasificador, output = "consola") -> None:
         self.c = clasificador
