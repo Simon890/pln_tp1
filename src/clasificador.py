@@ -93,5 +93,6 @@ class Clasificador:
                 similitud.append([titulo1, titulo2, simcos])
         df_cos = pd.DataFrame(similitud, columns=["Titulo 1", "Titulo 2", "Similitud"])
         print("\n###### SIMILITUD DEL COSENO ######")
-        print(df_cos.to_string())
+        print(df_cos)
+        df_cos.to_excel("similitud_coseno.xlsx")
         
