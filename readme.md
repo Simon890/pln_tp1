@@ -8,7 +8,7 @@
 * Simón Revello
 * Ezequiel Arévalo
 
-Informe en PDF: https://drive.google.com/file/d/13RbW2GAXovzwH-Jf2Xk20xcN7--0Z79O/view?usp=sharing
+Informe en PDF: https://drive.google.com/file/d/1Ufy2gs8dZAYjSYKeL3HAHGrqfCxsaJ4B/view?usp=sharing
 
 ---
 En este proyecto se utiliza el sitio web de La Nación para obtener información sobre las noticias. Las categorías a utilizar son:
